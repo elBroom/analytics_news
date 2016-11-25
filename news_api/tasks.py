@@ -8,7 +8,7 @@ app = Celery('analytics_news')
 
 # Create your tasks here
 @app.task(bind=True)
-def grabber_task(page=0, per_page=50, locale='ru'):
+def grabber_task(self, page=0, per_page=50, locale='ru'):
     try:
         response = requests.get("http://meduza.io/api/v3/search", params={
             'chrono': 'news',

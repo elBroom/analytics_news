@@ -29,6 +29,20 @@ class GrabberTestCase(TestCase):
                     },
                     "locale": "ru"
                 },
+                "news/2016/11/23/v-peterburge-otkryli-pervuyu-v-rossii-prachechnuyu-dlya-bezdomnyh1": {
+                    "title": "В Петербурге открыли первую в России прачечную для бездомных",
+                    "url": "news/2016/11/23/v-peterburge-otkryli-pervuyu-v-rossii-prachechnuyu-dlya-bezdomnyh",
+                    "document_type": "news",
+                    "version": 3,
+                    "published_at": 1479906553,
+                    "modified_at": 1479906553,
+                    "pub_date": "2016-11-23",
+                    "source": {
+                        "name": "Meduza",
+                        "trust": 3
+                    },
+                    "locale": "ru"
+                },
                 "game/2016/11/23/v-peterburge-otkryli-pervuyu-v-rossii-prachechnuyu-dlya-bezdomnyh": {
                     "title": "В Петербурге открыли первую в России прачечную для бездомных",
                     "url": "game/2016/11/23/v-peterburge-otkryli-pervuyu-v-rossii-prachechnuyu-dlya-bezdomnyh",
@@ -42,10 +56,10 @@ class GrabberTestCase(TestCase):
             }
         })
         self.assertTrue(result)
-        self.assertEqual(result, u"Добавлено новостей: 1; Изменено новостей: 0")
+        self.assertEqual(result, u"Добавлено новостей: 1; Изменено новостей: 1")
 
     def test_grabber_task(self):
-        result = grabber_task(per_page=30)
+        result = grabber_task(page=2, per_page=30)
         self.assertEqual(result, u"Данные получены")
 
 
@@ -56,7 +70,6 @@ class NewsApiTestCase(TestCase):
             username='test', email="test@te.com", password='password')
         self.token = AuthToken.objects.create(self.user)
         self.client = APIClient()
-
 
     def test_login(self):
         response = self.login()
